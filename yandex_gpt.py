@@ -19,7 +19,6 @@ def count_gpt_tokens(messages):
     except Exception as e:
         logging.error(e)
         return 0
-
 def ask_gpt(messages):
     iam_token, folder_id = get_creds()
     url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
