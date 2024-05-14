@@ -1,10 +1,9 @@
 import sqlite3
+from config import DB_FILE
 import logging
-from config import LOGS, DB_FILE
 
-logging.basicConfig(filename=LOGS, level=logging.ERROR,
-                    format="%(asctime)s FILE: %(filename)s IN: %(funcName)s MESSAGE: %(message)s", filemode="w")
 path_to_db = DB_FILE
+
 
 def create_database():
     try:
@@ -18,15 +17,16 @@ def create_database():
                 role TEXT,
                 total_gpt_tokens INTEGER,
                 tts_symbols INTEGER,
-                stt_blocks INTEGER)
+                stt_blocks INTEGER);
             ''')
             logging.info("DATABASE: База данных создана")
     except Exception as e:
         logging.error(e)
         return None
+
+
 def add_message(user_id, full_message):
     try:
-
         with sqlite3.connect(path_to_db) as conn:
             cursor = conn.cursor()
             message, role, total_gpt_tokens, tts_symbols, stt_blocks = full_message
@@ -42,6 +42,7 @@ def add_message(user_id, full_message):
         logging.error(e)
         return None
 
+
 def count_users(user_id):
     try:
         with sqlite3.connect(path_to_db) as conn:
@@ -52,6 +53,7 @@ def count_users(user_id):
     except Exception as e:
         logging.error(e)
         return None
+
 
 def select_n_last_messages(user_id, n_last_messages=4):
     messages = []
@@ -71,6 +73,7 @@ def select_n_last_messages(user_id, n_last_messages=4):
     except Exception as e:
         logging.error(e)
         return messages, total_spent_tokens
+
 
 def count_all_limits(user_id, limit_type):
     try:
