@@ -2,7 +2,7 @@ import requests
 import logging
 from config import MAX_GPT_TOKENS, SYSTEM_PROMPT
 from creds import get_creds
-.
+
 
 def count_gpt_tokens(messages):
     iam_token, folder_id = get_creds()
