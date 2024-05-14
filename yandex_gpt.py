@@ -3,7 +3,6 @@ import logging
 from config import MAX_GPT_TOKENS, SYSTEM_PROMPT
 from creds import get_creds
 
-
 def count_gpt_tokens(messages):
     iam_token, folder_id = get_creds()
     url = "https://llm.api.cloud.yandex.net/foundationModels/v1/tokenizeCompletion"
